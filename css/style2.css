@@ -1,0 +1,88 @@
+/* =========================================================
+   nplus — style2.css
+   キャラクター（女の子・ねこ）とアイテムまわりの追加スタイル
+   ========================================================= */
+
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* gentle bobbing for characters */
+.bob { transform-box: fill-box; transform-origin: bottom center; animation: bob 4.5s ease-in-out infinite; }
+.bob--late { animation-delay: -2.2s; }
+@keyframes bob { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-4px) rotate(-1.5deg); } }
+
+/* ---------- Concept ---------- */
+.concept__art { width: min(340px, 80%); margin: 0 auto 36px; }
+.concept__art svg { width: 100%; height: auto; overflow: visible; }
+.bulb { transform-box: fill-box; transform-origin: center bottom; animation: bulb 3s ease-in-out infinite; }
+@keyframes bulb { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.bulb path:last-child { animation: twinkle 1.6s ease-in-out infinite; }
+
+/* ---------- Feature steps ---------- */
+.step__head--char { place-items: end center; }
+.step__head--char .step__char { width: 100%; max-width: 230px; height: 140px; overflow: visible; }
+.step:hover .step__char .bob { animation-duration: 1.2s; }
+
+/* ---------- Service panels (items) ---------- */
+.svc__art--item { place-items: stretch; }
+.svc__art--item svg { width: 100%; height: 100%; }
+.svc:hover .svc__art--item svg { transform: none; }
+
+/* item motions */
+.orbit { transform-box: fill-box; transform-origin: center; animation: orbit 5s ease-in-out infinite; }
+.orbit--2 { animation-delay: -1.6s; } .orbit--3 { animation-delay: -3.2s; }
+@keyframes orbit { 0%, 100% { transform: translate(0, 0) rotate(0); } 50% { transform: translate(0, -7px) rotate(-5deg); } }
+.note { transform-box: fill-box; transform-origin: top center; animation: note 3.6s ease-in-out infinite; }
+.note--2 { animation-delay: -1.2s; } .note--3 { animation-delay: -2.4s; }
+@keyframes note { 0%, 100% { rotate: 0deg; } 50% { rotate: 4deg; } }
+.pencil { transform-box: fill-box; transform-origin: center; animation: pencil 2.4s ease-in-out infinite; }
+@keyframes pencil { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-6px, -4px); } }
+.gear { transform-box: fill-box; transform-origin: center; animation: spin 8s linear infinite; }
+.gear--rev { animation-direction: reverse; animation-duration: 5s; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.nudge { animation: nudge 1.8s ease-in-out infinite; }
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(5px); } }
+.flag { transform-box: fill-box; transform-origin: left center; animation: flag 2.2s ease-in-out infinite; }
+@keyframes flag { 0%, 100% { transform: skewY(0); } 50% { transform: skewY(-6deg) scaleX(.94); } }
+.qbubble { transform-box: fill-box; transform-origin: left bottom; animation: pop 3.2s ease-in-out infinite; }
+.svc:hover .gear { animation-duration: 2s; }
+
+/* keep both service rows the same proportion so characters are the same size */
+@media (min-width: 721px) { .svc--rev { grid-template-columns: 1.15fr .85fr; } }
+
+/* ---------- FAQ ---------- */
+.faq .container { position: relative; }
+.faq__char { position: absolute; left: 40px; top: 42px; width: 150px; }
+.faq__char svg { width: 100%; height: auto; overflow: visible; }
+
+/* ---------- CTA ---------- */
+.cta__box { padding-bottom: clamp(120px, 12vw, 150px); }
+.cta__shape--2 { display: none; }
+.cta__girl { position: absolute; bottom: -2px; width: clamp(96px, 12vw, 150px); height: auto; overflow: visible; transform: translateY(100%); transition: transform 1s var(--ease) .3s; }
+.cta__girl--a { left: 8%; }
+.cta__girl--b { right: 8%; transition-delay: .45s; }
+.cta__box.is-in .cta__girl { transform: translateY(0); }
+.cta__box:hover .cta__girl--a { transform: translateY(-8px) rotate(-3deg); }
+.cta__box:hover .cta__girl--b { transform: translateY(-8px) rotate(3deg); }
+
+/* ---------- Contact ---------- */
+.contact__card { margin-top: 190px; }
+.contact__girls { position: absolute; left: 50%; bottom: calc(100% - 2px); width: 300px; transform: translateX(-50%); }
+.contact__girls svg { width: 100%; height: auto; overflow: visible; }
+.contact__bubble { transform-box: fill-box; transform-origin: left bottom; animation: pop 3.6s ease-in-out infinite; }
+@keyframes pop { 0%, 70%, 100% { transform: scale(1); } 80% { transform: scale(1.12) rotate(-4deg); } 90% { transform: scale(.96); } }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .faq__char { position: static; width: 120px; margin: 0 auto 12px; }
+}
+@media (max-width: 720px) {
+  .cta__box { padding-bottom: 120px; }
+  .cta__girl { width: 92px; }
+  .cta__girl--a { left: 4%; }
+  .cta__girl--b { right: 4%; }
+  .contact__card { margin-top: 160px; }
+  .contact__girls { width: 240px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cta__girl { transform: none !important; }
+}
